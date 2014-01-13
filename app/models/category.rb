@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   has_many  :videos
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   before_save :generate_slug
 

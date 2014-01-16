@@ -1,6 +1,8 @@
 %article.video_category
   %header
-  - @results.each do |video|
-    .video.col-sm-2
-      = link_to video_path(video), nil do
-        %img(src="#{video.small_cover_url}")
+    %h3 Search Results For: "#{params[:search_term]}"
+    %br
+    - @results.each do |video|
+      .video.col-sm-2
+        = link_to video_path(video), nil do
+          %img(src="#{video.small_cover_url}")

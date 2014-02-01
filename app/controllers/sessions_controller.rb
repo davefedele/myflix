@@ -1,12 +1,11 @@
 class SessionsController < ApplicationController 
   def new
     redirect_to home_path if current_user
-    @user = User.new
   end
 
   def create
-    user = User.where(email: params[:user][:email]).first
-    if user && user.authenticate(params[:user][:password])
+    user = User.where(email: params[:email]).first
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to home_path
       flash[:success] = "You are now signed in, enjoy!"

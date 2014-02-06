@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to  :category
-  has_many :reviews, order: "created_at DESC"
+  has_many :reviews, -> { order ("created_at DESC") }
 
   validates_presence_of :title, :description
 
@@ -10,11 +10,6 @@ class Video < ActiveRecord::Base
   end
 
   def avg_rating
-    return 0 if self.reviews.empty?
-    cumulative_rating = 0
-    self.reviews.each do |review|
-      cumulative_rating += review.rating
-    end
-    cumulative_rating/self.reviews.count.to_f
+    reviews.average(:rating).round(1) if reviews.average(:rating)
   end
 end

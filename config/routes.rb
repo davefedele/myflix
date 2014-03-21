@@ -8,7 +8,10 @@ Myflix::Application.routes.draw do
     end
      resources :reviews, only: [:create]
   end
-  
+
+  get 'people', to: 'relationships#index'
+  resources :relationships, only: [:destroy]
+
   get 'my_queue', to: 'queue_items#index'
   post 'update_queue', to: 'queue_items#update_queue'
  
